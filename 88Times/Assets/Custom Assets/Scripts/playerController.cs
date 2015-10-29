@@ -69,7 +69,11 @@ public class playerController : MonoBehaviour {
 			return false;
 		return true;
 	}
-	
+
+	void OnTriggerEnter(Collider other){
+		LifePoint--;
+	}
+
 	// Update is called once per frame
 	void Update () {/*
 	 if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Moved) {
@@ -82,6 +86,6 @@ public class playerController : MonoBehaviour {
 				this.MoveLeft();
 			}
 		}*/
-		
+
 	}
 }

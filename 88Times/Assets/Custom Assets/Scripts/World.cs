@@ -30,6 +30,9 @@ public class World : MonoBehaviour {
 	private Obstacle you;
 	
 	private int debugCount = 0;
+
+	public float raport = 50;
+	private float result = 0;
 	// Use this for initialization
 	void Start () {
 	}
@@ -37,27 +40,29 @@ public class World : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GameActive) {
-			if (!Left && !Middle && !Right && Time.time > NextAlloc+0.5f){
-				Debug.Log ("ICI");
-				RandLine = (int) Random.Range(1.0f, 3.99f);
-				switch (RandLine){
-				case 1:
-					AllocPos = -2.0f;
-					break;
-				case 2:
-					AllocPos = 0.0f;
-					break;
-				case 3:
-					AllocPos = 2.0f;
-					break;
+			result = Random.Range(0.0f,100.0f);
+			if( result < raport){
+				if (!Left && !Middle && !Right && Time.time > NextAlloc+0.5f){
+					Debug.Log ("ICI");
+					RandLine = (int) Random.Range(1.0f, (Obstacles.Count)+0.99f);
+					switch (RandLine){
+					case 1:
+						AllocPos = -2.0f;
+						break;
+					case 2:
+						AllocPos = 0.0f;
+						break;
+					case 3:
+						AllocPos = 2.0f;
+						break;
+					}
+					
+					RandObstacle = (int) Random.Range(0.0f, (Obstacles.Count - 0.01f));
+					GameObject NewObstacle;
+					NewObstacle = Instantiate(Obstacles[RandObstacle], new Vector2(AllocPos,AllocDist), transform.rotation) as GameObject;
+					NextAlloc = Time.time + AllocTime;
 				}
-				
-				RandObstacle = (int) Random.Range(0.0f, (Obstacles.Count - 0.01f));
-				GameObject NewObstacle;
-				NewObstacle = Instantiate(Obstacles[RandObstacle], new Vector2(AllocPos,AllocDist), transform.rotation) as GameObject;
-				NextAlloc = Time.time + AllocTime;
 			}
-			
 			
 		}
 	}
