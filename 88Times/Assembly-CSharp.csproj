@@ -46,8 +46,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Custom Assets\Scripts\ButtonsEffects.cs" />
+     <Compile Include="Assets\Custom Assets\Scripts\Obstacle.cs" />
      <Compile Include="Assets\Custom Assets\Scripts\SplashScreen.cs" />
      <Compile Include="Assets\Custom Assets\Scripts\SwipeDetector.cs" />
+     <Compile Include="Assets\Custom Assets\Scripts\TriggerTest.cs" />
      <Compile Include="Assets\Custom Assets\Scripts\World.cs" />
      <Compile Include="Assets\Custom Assets\Scripts\Yggdrasil.cs" />
      <Compile Include="Assets\Custom Assets\Scripts\playerController.cs" />

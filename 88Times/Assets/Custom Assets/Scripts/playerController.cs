@@ -1,44 +1,73 @@
 ﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class playerController : MonoBehaviour {
-
+	
 	public int LifePoint = 3;
 	public GameObject Left, Middle, Right;
 	private int pos = 2 ;
 	private Rigidbody RigidPlayer;
 	public GameObject debuging;
-
+	private float speed = 0.5f;
+	
 	// Use this for initialization
 	void Start () {
 		RigidPlayer = GetComponent<Rigidbody>();
 		RigidPlayer.MovePosition (Middle.transform.position);
 		pos = 2;
 	}
-
-	public void MoveLeft(){
+	
+	public bool MoveLeft(){
+		Vector3 dest = Vector3.zero;
+		Vector3 curr = RigidPlayer.position;
+		
 		if (pos > 1) {
-			if (pos == 2) {
-				RigidPlayer.MovePosition (Left.transform.position);
-				pos = 1;
-			} else if (pos == 3) {
-				RigidPlayer.MovePosition (Middle.transform.position);
-				pos = 2;
+			{
+				if (pos == 2) {
+					dest = Left.transform.position;
+				} else if (pos == 3) {
+					dest = Middle.transform.position;
+				}
 			}
-		}
-	}
+			if (curr == dest) {
+				if (dest == Left.transform.position)
+					pos = 1;
+				else if (dest == Middle.transform.position)
+					pos = 2;
+				return false;
+			} else 
+				RigidPlayer.position = Vector3.MoveTowards (curr, dest, speed);
+		} else if (pos == 1)
+			return false;
 
-	public void MoveRight(){
-		if (pos < 3){
-			if (pos == 1){
-				RigidPlayer.MovePosition (Middle.transform.position);
-				pos = 2;
+		return true;
+	}
+	
+	
+	public bool MoveRight(){
+		Vector3 dest = Vector3.zero;
+		Vector3 curr = RigidPlayer.position;
+		
+		if (pos < 3) {
+			{
+				if (pos == 2) {
+					dest = Right.transform.position;
+				} else if (pos == 1) {
+					dest = Middle.transform.position;
+				}
 			}
-			else if (pos == 2){
-				RigidPlayer.MovePosition (Right.transform.position);
-				pos = 3;
-			}
-		}
+			if (curr == dest) {
+				if (dest == Right.transform.position)
+					pos = 3;
+				else if (dest == Middle.transform.position)
+					pos = 2;
+				return false;
+			} else 
+				RigidPlayer.position = Vector3.MoveTowards (curr, dest, speed);
+		} else if (pos == 3)
+			return false;
+		return true;
 	}
 	
 	// Update is called once per frame
@@ -53,6 +82,6 @@ public class playerController : MonoBehaviour {
 				this.MoveLeft();
 			}
 		}*/
-
+		
 	}
 }
